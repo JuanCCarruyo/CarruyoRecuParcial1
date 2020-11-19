@@ -100,10 +100,10 @@ int main(void) {
 	harcodeoClientes(arrayClientes,MAX);
 
 	//hardcore for testing
-//	harcodeoElectro(arrayElectro,MAX);
-//	harcodeoReparacion(arrayRep,MAX);
-	int flagAltaElectro=0;
-	int flagAltaReparacion=0;
+	harcodeoElectro(arrayElectro,MAX);
+	harcodeoReparacion(arrayRep,MAX);
+	int flagAltaElectro=1;
+	int flagAltaReparacion=1;
 	//hardcode end
 
 	do {
@@ -344,7 +344,7 @@ int main(void) {
 				break;
 
 			case 10: //INFORMES
-
+				if(flagAltaElectro == 1 || flagAltaReparacion == 1){
 				resultadoMenuInformes = getInt(&opcion2,
 						"Menu de Opciones\n"
 						"1- Mostrar Electrodomesticos del anio(modelo) 2020 \n"
@@ -373,9 +373,14 @@ int main(void) {
 
 				case 1: //"1- Mostrar Electrodomesticos del anio(modelo) 2020 \n"
 
+					if(flagAltaElectro == 1){
 					resMostrarElectro2020 = mostrarElectroAnio(arrayElectro, pElectro2020, marcas, MAX, 2020);
 					if (resMostrarElectro2020 != 0) {
 						printf("\nError mostrando el informe.\n");
+						system("pause");
+					}
+					} else {
+						printf("\nDebe cargar un electrodomestico antes de mostrar el informe.\n");
 						system("pause");
 					}
 
@@ -383,11 +388,17 @@ int main(void) {
 
 				case 2: //"2- Mostrar Electrodomesticos de una marca seleccionada\n"
 
+					if(flagAltaElectro == 1){
 					resMostrarElectroMarca = mostrarElectroMarca(arrayElectro, marcas, pElectroMarca, MAX);
 					if (resMostrarElectroMarca != 0) {
 						printf("\nError mostrando el informe.\n");
 						system("pause");
 					}
+					} else {
+						printf("\nDebe cargar un electrodomestico antes de mostrar el informe.\n");
+						system("pause");
+					}
+
 
 					break;
 
@@ -512,8 +523,10 @@ int main(void) {
 
 
 				}
-
-
+				}else{
+					printf("\nDebe cargar algun electrodomestico o reparacion antes de mostrar los informes. \n");
+					system("pause");
+				}
 
 				break;
 
